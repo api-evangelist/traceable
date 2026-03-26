@@ -1,32 +1,72 @@
 aid: traceable
 name: Traceable
 description: >-
-  API Discovery ... API discovery rules consist of API documentation, naming,
-  and exclusion rules. Using these components, you can: ... While the ...
+  Traceable is an API security and observability platform that provides API
+  discovery, threat detection, and protection across the full application
+  lifecycle. It uses context-aware AI to detect and block API-based attacks
+  while providing deep visibility into API behavior and risk.
 type: Index
 position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - API
+  - Security
+  - Observability
+  - API Discovery
+  - Threat Detection
+  - API Protection
 created: '2025-01-08'
-modified: '2026-03-16'
+modified: '2026-03-26'
 url: >-
   https://raw.githubusercontent.com/api-evangelist/traceable/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: traceable:traceable
-    name: Traceable
+  - aid: traceable:traceable-platform
+    name: Traceable API Security Platform
     description: >-
-      API Discovery ... API discovery rules consist of API documentation,
-      naming, and exclusion rules. Using these components, you can: ... While
-      the ...
-    humanURL: https://docs.traceable.ai/docs/api-discovery
+      Traceable provides an intelligent API security platform that offers API
+      discovery, threat detection and protection, and API security testing. It
+      uses distributed tracing and context-aware AI to understand API behavior,
+      detect threats, and protect APIs across the full application lifecycle.
+    humanURL: https://www.traceable.ai
     tags:
-      - API
+      - API Security
+      - API Discovery
+      - Threat Detection
+      - API Testing
+      - Observability
     properties:
       - type: Documentation
-        url: https://docs.traceable.ai/docs/api-discovery
+        url: https://docs.traceable.ai
+      - type: API Discovery
+        url: https://www.traceable.ai/product/api-discovery
+      - type: Threat Detection
+        url: https://www.traceable.ai/product/threat-detection
+      - type: API Security Testing
+        url: https://www.traceable.ai/product/api-security-testing
+common:
+  - type: Website
+    url: https://www.traceable.ai
+  - type: Documentation
+    url: https://docs.traceable.ai
+  - type: Blog
+    url: https://www.traceable.ai/blog
+  - type: About
+    url: https://www.traceable.ai/company
+  - type: Contact
+    url: https://www.traceable.ai/contact
+  - type: Demo
+    url: https://www.traceable.ai/request-demo
+  - type: Partners
+    url: https://www.traceable.ai/partners
+  - type: Resources
+    url: https://www.traceable.ai/resources
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/traboraceable/
+  - type: Twitter
+    url: https://twitter.com/ATraceableAI
+  - type: GitHub
+    url: https://github.com/Traceableai
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
