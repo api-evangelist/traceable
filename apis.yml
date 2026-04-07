@@ -10,11 +10,11 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Security
-  - Observability
   - API Discovery
-  - Threat Detection
   - API Protection
+  - Observability
+  - Security
+  - Threat Detection
 created: '2025-01-08'
 modified: '2026-03-26'
 url: >-
@@ -30,11 +30,11 @@ apis:
       detect threats, and protect APIs across the full application lifecycle.
     humanURL: https://www.traceable.ai
     tags:
-      - API Security
       - API Discovery
-      - Threat Detection
+      - API Security
       - API Testing
       - Observability
+      - Threat Detection
     properties:
       - type: Documentation
         url: https://docs.traceable.ai
