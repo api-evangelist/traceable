@@ -1,0 +1,98 @@
+extends: spectral:oas
+rules:
+  traceable-operation-summary-title-case:
+    description: Operation summaries must use Title Case.
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9]*(\\s[A-Z][a-zA-Z0-9]*)*$"
+
+  traceable-operation-ids-required:
+    description: All operations must have an operationId.
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: defined
+
+  traceable-operation-description-required:
+    description: All operations must have a description.
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: description
+      function: defined
+
+  traceable-bearer-auth-required:
+    description: All operations must require Bearer token authentication.
+    severity: error
+    given: "$.components.securitySchemes.bearerAuth"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          properties:
+            type:
+              const: http
+            scheme:
+              const: bearer
+
+  traceable-tags-required:
+    description: All operations must be tagged.
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: defined
+
+  traceable-graphql-request-body:
+    description: GraphQL endpoint must define a requestBody with query field.
+    severity: error
+    given: "$.paths['/graphql'][post]"
+    then:
+      field: requestBody
+      function: defined
+
+  traceable-response-200-defined:
+    description: All operations must define a 200 or 201 success response.
+    severity: error
+    given: "$.paths[*][*].responses"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          anyOf:
+            - required: ["200"]
+            - required: ["201"]
+
+  traceable-response-401-defined:
+    description: All operations must define a 401 unauthorized response.
+    severity: warn
+    given: "$.paths[*][*].responses"
+    then:
+      field: "401"
+      function: defined
+
+  traceable-graphql-schema-required:
+    description: GraphQLRequest schema must define the query field as required.
+    severity: error
+    given: "$.components.schemas.GraphQLRequest.required"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            const: query
+
+  traceable-mcp-tool-enum:
+    description: MCPRequest tool field must enumerate valid tool names.
+    severity: warn
+    given: "$.components.schemas.MCPRequest.properties.tool"
+    then:
+      field: enum
+      function: defined

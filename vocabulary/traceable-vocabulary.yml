@@ -1,0 +1,116 @@
+name: Traceable API Security Vocabulary
+description: >-
+  Domain vocabulary for the Traceable API security and observability platform
+  covering API discovery, threat detection, vulnerability management, and
+  security testing concepts.
+tags:
+  - API Discovery
+  - API Security
+  - Observability
+  - Security Operations
+  - Threat Detection
+  - Vulnerability Management
+terms:
+  - term: API Discovery
+    description: >-
+      The automatic identification and cataloging of all API endpoints in an
+      organization's application environment, including REST, SOAP, gRPC,
+      GraphQL, and WebSocket APIs, regardless of whether they are documented.
+  - term: Shadow API
+    description: >-
+      An undocumented API endpoint that is actively used in production but
+      was not intentionally exposed or is unknown to the security team.
+    synonyms:
+      - Unknown API
+      - Orphan API
+  - term: Zombie API
+    description: >-
+      A deprecated or outdated API endpoint that is no longer in active
+      use but is still accessible in production and represents a security risk.
+    synonyms:
+      - Deprecated API
+  - term: Risk Score
+    description: >-
+      A classification assigned by Traceable to an API endpoint based on
+      factors including authentication state, sensitive data exposure,
+      vulnerability history, and traffic anomalies.
+    values:
+      - LOW
+      - MEDIUM
+      - HIGH
+      - CRITICAL
+  - term: Threat Actor
+    description: >-
+      An individual or automated system identified by Traceable as engaging
+      in suspicious or malicious API activity. Characterized by patterns
+      of API abuse, unauthorized access attempts, or data extraction behavior.
+  - term: Threat Activity
+    description: >-
+      Observable malicious or suspicious behavior against API endpoints,
+      including injection attacks, authentication bypass, excessive data
+      scraping, and bot activity.
+  - term: Vulnerability
+    description: >-
+      A security weakness in an API endpoint identified by Traceable through
+      traffic analysis or active security testing. Classified by severity
+      and mapped to OWASP API Security Top 10 categories.
+  - term: OWASP API Security Top 10
+    description: >-
+      The Open Web Application Security Project's list of the most critical
+      security risks to APIs. Traceable maps vulnerability findings to OWASP
+      categories such as Broken Object Level Authorization and Broken
+      Authentication.
+  - term: API Security Testing
+    abbreviation: AST
+    description: >-
+      Automated testing of API security posture using live traffic replay,
+      specification-based fuzzing, and business logic testing to identify
+      exploitable vulnerabilities before they reach production.
+  - term: Platform API Token
+    description: >-
+      A secret credential generated in the Traceable dashboard for
+      authenticating API requests to the Traceable public GraphQL API.
+      Single-use and cannot be retrieved after initial generation.
+  - term: Entity
+    description: >-
+      A tracked object in the Traceable platform. Entities include APIs,
+      services, domains, backend services, actors, and backend APIs.
+    types:
+      - API
+      - SERVICE
+      - DOMAIN
+      - BACKEND
+      - ACTOR
+      - BACKEND_API
+  - term: Discovery State
+    description: >-
+      The current learning state of an API endpoint in Traceable's
+      discovery engine.
+    values:
+      - DISCOVERED: API has been fully profiled
+      - UNDER_DISCOVERY: API is currently being analyzed
+  - term: MCP Server
+    description: >-
+      A Model Context Protocol server exposing Traceable security data and
+      tools to AI assistants. Provides 12 tools for querying threats,
+      vulnerabilities, API entities, and sensitive data.
+  - term: Sensitive Data Type
+    description: >-
+      A classification of data passing through API endpoints that may require
+      special handling due to privacy or compliance requirements, such as
+      PII, financial data, or health information.
+  - term: Conformance Analysis
+    description: >-
+      Traceable's comparison of actual observed API traffic against a
+      provided OpenAPI specification to identify deviations, undocumented
+      parameters, and unexpected behavior.
+  - term: WAF Policy
+    description: >-
+      Web Application Firewall policies configured in Traceable to block
+      or monitor malicious API requests based on attack signatures, threat
+      categories, and behavioral rules.
+  - term: Bot Detection
+    description: >-
+      Traceable's capability to identify automated non-human API traffic
+      patterns indicating credential stuffing, scraping, enumeration attacks,
+      or other bot-driven abuse.

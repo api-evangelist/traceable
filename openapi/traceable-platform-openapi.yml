@@ -1,0 +1,312 @@
+openapi: 3.1.0
+info:
+  title: Traceable Platform API
+  description: >-
+    The Traceable Platform API provides programmatic access to the Traceable
+    API security and observability platform. The API enables querying of
+    discovered API endpoints, vulnerability data, threat activity, entity
+    analytics, and API security test suite configuration. Authentication uses
+    a platform API token passed in the Authorization header. The platform
+    exposes both a GraphQL API and REST endpoints for API specification
+    downloads and MCP server access.
+  version: '1.0'
+  contact:
+    name: Traceable Support
+    url: https://docs.traceable.ai
+  termsOfService: https://www.traceable.ai
+externalDocs:
+  description: Traceable API Documentation
+  url: https://docs.traceable.ai/docs/public-apis
+servers:
+  - url: https://api.traceable.ai
+    description: Traceable Production API
+tags:
+  - name: API Discovery
+    description: >-
+      Query and manage discovered API endpoints including endpoint inventory,
+      authentication analysis, risk scoring, and activity analytics.
+  - name: Vulnerabilities
+    description: >-
+      Retrieve and manage API vulnerability findings including risk levels,
+      OWASP category classification, and remediation status.
+  - name: Threat Activity
+    description: >-
+      Query threat actor activity, blocked requests, attack patterns, and
+      API-based threat incidents.
+  - name: Security Testing
+    description: >-
+      Configure and manage API security test suites and scans including
+      test creation, scheduling, and results retrieval.
+  - name: Specifications
+    description: >-
+      Download OpenAPI, WSDL, and other API specification files generated
+      from discovered traffic.
+  - name: GraphQL
+    description: >-
+      Execute GraphQL queries against the Traceable platform for advanced
+      analytics, entity queries, and bulk data retrieval.
+security:
+  - bearerAuth: []
+paths:
+  /graphql:
+    post:
+      operationId: executeGraphQLQuery
+      summary: Execute GraphQL Query
+      description: >-
+        Executes a GraphQL query or mutation against the Traceable platform.
+        Supports queries for entities, vulnerabilities, threat activity,
+        explore datasets, API testing data, analytics batches, and
+        authentication hooks. Use the Authorization header with your
+        platform API token.
+      tags:
+        - GraphQL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GraphQLRequest'
+      responses:
+        '200':
+          description: GraphQL query executed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphQLResponse'
+        '400':
+          description: Invalid GraphQL query syntax
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized - invalid or missing API token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /rest/download:
+    get:
+      operationId: downloadAPISpec
+      summary: Download API Specification
+      description: >-
+        Downloads the OpenAPI or WSDL specification generated from discovered
+        API traffic for the authenticated environment. The specification
+        reflects the actual observed API surface including endpoints,
+        parameters, and request/response schemas. Use the
+        createApiDefinition GraphQL mutation to trigger generation first,
+        then retrieve the download URL via getApiDefinition query.
+      tags:
+        - Specifications
+      parameters:
+        - name: format
+          in: query
+          description: >-
+            Specification format to download.
+          required: false
+          schema:
+            type: string
+            enum:
+              - openapi-yaml
+              - openapi-json
+              - wsdl
+            default: openapi-yaml
+        - name: service
+          in: query
+          description: Filter specification to a specific service name.
+          required: false
+          schema:
+            type: string
+        - name: domain
+          in: query
+          description: Filter specification to a specific domain.
+          required: false
+          schema:
+            type: string
+        - name: label
+          in: query
+          description: Filter specification by API label.
+          required: false
+          schema:
+            type: string
+        - name: environment
+          in: query
+          description: Filter specification by deployment environment.
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: API specification file download
+          content:
+            application/x-yaml:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Specification not found or not yet generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /mcp:
+    post:
+      operationId: executeMCPTool
+      summary: Execute MCP Tool
+      description: >-
+        Executes a tool via the Traceable MCP (Model Context Protocol) server.
+        The MCP server exposes 12 tools for AI-assisted security workflows
+        including attribute mappings, GraphQL query templates, threat activity
+        time ranges, vulnerability filter values, sensitive data type details,
+        and trend data calculation.
+      tags:
+        - GraphQL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MCPRequest'
+      responses:
+        '200':
+          description: MCP tool executed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MCPResponse'
+        '400':
+          description: Invalid tool call
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Platform API token generated through the Traceable dashboard. Pass
+        as a Bearer token in the Authorization header. Tokens are single-use
+        and cannot be retrieved after initial generation.
+  schemas:
+    Error:
+      type: object
+      description: Standard error response from the Traceable API.
+      properties:
+        error:
+          type: string
+          description: Error type identifier.
+        message:
+          type: string
+          description: Human-readable error description.
+        statusCode:
+          type: integer
+          description: HTTP status code.
+    GraphQLRequest:
+      type: object
+      description: A GraphQL query or mutation request.
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          description: The GraphQL query or mutation string.
+        variables:
+          type: object
+          description: Variables to pass to the GraphQL query.
+          additionalProperties: true
+        operationName:
+          type: string
+          description: Name of the operation to execute when multiple are defined.
+    GraphQLResponse:
+      type: object
+      description: A GraphQL response containing data or errors.
+      properties:
+        data:
+          type: object
+          description: The GraphQL response data.
+          additionalProperties: true
+        errors:
+          type: array
+          description: List of GraphQL errors if any occurred.
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              locations:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    line:
+                      type: integer
+                    column:
+                      type: integer
+              path:
+                type: array
+                items:
+                  type: string
+    MCPRequest:
+      type: object
+      description: An MCP tool invocation request.
+      required:
+        - tool
+      properties:
+        tool:
+          type: string
+          description: >-
+            Name of the MCP tool to execute. Available tools include:
+            get_attribute_mappings, get_graphql_query_template_details,
+            execute_graphql_query, get_query_time_range,
+            get_threat_activity_timerange,
+            get_vuln_enum_filter_supported_values,
+            get_datatypes_details_from_datatype_names,
+            get_datatypes_details_from_datatype_ids,
+            calculate_trend_data, get_display_urls.
+          enum:
+            - get_attribute_mappings
+            - get_graphql_query_template_details
+            - execute_graphql_query
+            - get_query_time_range
+            - get_threat_activity_timerange
+            - get_vuln_enum_filter_supported_values
+            - get_datatypes_details_from_datatype_names
+            - get_datatypes_details_from_datatype_ids
+            - calculate_trend_data
+            - get_display_urls
+        parameters:
+          type: object
+          description: Parameters for the tool call.
+          additionalProperties: true
+    MCPResponse:
+      type: object
+      description: Result of an MCP tool execution.
+      properties:
+        result:
+          type: object
+          description: Tool execution result data.
+          additionalProperties: true
+        error:
+          type: string
+          description: Error message if the tool execution failed.

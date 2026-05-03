@@ -1,41 +1,90 @@
-# Traceable (traceable)
-API Discovery ... API discovery rules consist of API documentation, naming, and exclusion rules. Using these components, you can: ... While the ...
+# Traceable
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/traceable/refs/heads/main/apis.yml)
+Traceable is an API security and observability platform that provides API discovery, threat detection, and protection across the full application lifecycle. It uses context-aware AI to detect and block API-based attacks while providing deep visibility into API behavior and risk.
 
-## Scope
+**URL:** [apis.yml](https://raw.githubusercontent.com/api-evangelist/traceable/refs/heads/main/apis.yml)
 
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+## Tags
 
-## Tags:
-
- - API
-
-## Timestamps
-
-- **Created:** 2025-01-08 
-- **Modified:** 2026-03-16 
+- API Discovery
+- API Protection
+- API Security
+- API Testing
+- Observability
+- Security
+- Threat Detection
 
 ## APIs
 
-### Traceable
-API Discovery ... API discovery rules consist of API documentation, naming, and exclusion rules. Using these components, you can: ... While the ...
+### Traceable Platform GraphQL API
 
-**Human URL:** [https://docs.traceable.ai/docs/api-discovery](https://docs.traceable.ai/docs/api-discovery)
+The Traceable Platform GraphQL API provides programmatic access to API security configuration and operational data including API discovery analytics, vulnerability data, threat activity, and API security test management.
 
+**Human URL:** [https://docs.traceable.ai/docs/public-apis](https://docs.traceable.ai/docs/public-apis)
 
-#### Tags:
+**Base URL:** https://api.traceable.ai
 
- - API
+#### Tags
+
+- API Discovery
+- API Security
+- GraphQL
+- Threat Detection
+- Vulnerability Management
 
 #### Properties
 
-- [Documentation](https://docs.traceable.ai/docs/api-discovery)
+| Type | URL |
+|------|-----|
+| Documentation | [https://docs.traceable.ai/docs/public-apis](https://docs.traceable.ai/docs/public-apis) |
+| OpenAPI | [openapi/traceable-platform-openapi.yml](openapi/traceable-platform-openapi.yml) |
+| JSON Schema | [json-schema/traceable-api-entity-schema.json](json-schema/traceable-api-entity-schema.json) |
+| JSON Structure | [json-structure/traceable-api-entity-structure.json](json-structure/traceable-api-entity-structure.json) |
+| JSON-LD | [json-ld/traceable-context.jsonld](json-ld/traceable-context.jsonld) |
+| Spectral Rules | [rules/traceable-rules.yml](rules/traceable-rules.yml) |
+| Vocabulary | [vocabulary/traceable-vocabulary.yml](vocabulary/traceable-vocabulary.yml) |
+| GraphQL Endpoint | [https://api.traceable.ai/graphql](https://api.traceable.ai/graphql) |
+| MCP Server | [https://docs.traceable.ai/docs/traceable-mcp-server](https://docs.traceable.ai/docs/traceable-mcp-server) |
 
-## Maintainers
+### Traceable API Security Platform
 
-**FN:** Kin Lane
+Traceable's intelligent API security platform offering API discovery, threat detection, protection, and security testing using distributed tracing and context-aware AI.
 
-**Email:** kin@apievangelist.com
+**Human URL:** [https://www.traceable.ai](https://www.traceable.ai)
+
+### Traceable Active Security Testing
+
+Automated API security testing (AST) with CI/CD pipeline integrations for GitHub Actions, GitLab CI, and Jenkins.
+
+**Human URL:** [https://docs.traceable.ai/docs/en/ast-getting-started](https://docs.traceable.ai/docs/en/ast-getting-started)
+
+## Capabilities
+
+### API Security Operations
+
+Unified API security operations workflow combining API discovery analytics, vulnerability management, threat activity monitoring, and security testing.
+
+| File | Description |
+|------|-------------|
+| [capabilities/api-security-operations.yaml](capabilities/api-security-operations.yaml) | Workflow capability: 5 MCP tools for API security |
+| [capabilities/shared/traceable-platform.yaml](capabilities/shared/traceable-platform.yaml) | Shared per-API consumed definition |
+
+## Examples
+
+| File | Description |
+|------|-------------|
+| [examples/traceable-execute-graphql-query-example.json](examples/traceable-execute-graphql-query-example.json) | Execute GraphQL Query request/response example |
+| [examples/traceable-download-api-spec-example.json](examples/traceable-download-api-spec-example.json) | Download API Specification request/response example |
+
+## Common Properties
+
+| Type | URL |
+|------|-----|
+| Website | [https://www.traceable.ai](https://www.traceable.ai) |
+| Documentation | [https://docs.traceable.ai](https://docs.traceable.ai) |
+| Blog | [https://www.traceable.ai/blog](https://www.traceable.ai/blog) |
+| GitHub | [https://github.com/Traceableai](https://github.com/Traceableai) |
+| MCP Server | [https://docs.traceable.ai/docs/traceable-mcp-server](https://docs.traceable.ai/docs/traceable-mcp-server) |
+
+---
+*Maintained by Kin Lane (kin@apievangelist.com)*

@@ -1,0 +1,67 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.traceable.ai/graphql",
+    "headers": {
+      "Authorization": "Bearer {{TRACEABLE_API_TOKEN}}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "query": "query GetDiscoveredAPIs($startTime: String!, $endTime: String!, $limit: Int) { entities( scope: API, filter: { attributes: [] startTime: $startTime endTime: $endTime } pagination: { limit: $limit } ) { total results { id name entityType attributes { key value } } } }",
+      "variables": {
+        "startTime": "2026-05-03T00:00:00Z",
+        "endTime": "2026-05-03T23:59:59Z",
+        "limit": 50
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "data": {
+        "entities": {
+          "total": 3,
+          "results": [
+            {
+              "id": "api-001",
+              "name": "/api/v1/users",
+              "entityType": "API",
+              "attributes": [
+                { "key": "service", "value": "user-service" },
+                { "key": "method", "value": "GET" },
+                { "key": "authenticated", "value": "true" },
+                { "key": "riskScore", "value": "LOW" }
+              ]
+            },
+            {
+              "id": "api-002",
+              "name": "/api/v1/orders",
+              "entityType": "API",
+              "attributes": [
+                { "key": "service", "value": "order-service" },
+                { "key": "method", "value": "POST" },
+                { "key": "authenticated", "value": "true" },
+                { "key": "riskScore", "value": "MEDIUM" }
+              ]
+            },
+            {
+              "id": "api-003",
+              "name": "/api/internal/admin",
+              "entityType": "API",
+              "attributes": [
+                { "key": "service", "value": "admin-service" },
+                { "key": "method", "value": "GET" },
+                { "key": "authenticated", "value": "false" },
+                { "key": "riskScore", "value": "HIGH" },
+                { "key": "isInternal", "value": "true" }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

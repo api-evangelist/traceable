@@ -1,0 +1,145 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Traceable API Security Operations"
+  description: "Unified API security operations workflow combining API discovery analytics, vulnerability management, threat activity monitoring, and security testing. Used by security engineers and SOC analysts to monitor API risks, investigate threats, and manage vulnerability remediation."
+  tags:
+    - API Discovery
+    - API Security
+    - GraphQL
+    - Observability
+    - Security Operations
+    - Threat Detection
+    - Vulnerability Management
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TRACEABLE_API_TOKEN: TRACEABLE_API_TOKEN
+
+capability:
+  consumes:
+    - import: traceable-platform
+      location: ./shared/traceable-platform.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: api-security-operations-api
+      description: "Unified REST API for Traceable API security operations."
+      resources:
+        - path: /v1/graphql
+          name: graphql
+          description: "Execute GraphQL queries for API discovery, vulnerabilities, and threat data"
+          operations:
+            - method: POST
+              name: execute-graphql-query
+              description: "Execute GraphQL query for security analytics"
+              call: "traceable-platform.execute-graphql-query"
+              with:
+                query: "rest.query"
+                variables: "rest.variables"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/specifications
+          name: specifications
+          description: "Download API specifications discovered by Traceable"
+          operations:
+            - method: GET
+              name: download-api-spec
+              description: "Download discovered API specification"
+              call: "traceable-platform.download-api-spec"
+              with:
+                format: "rest.format"
+                service: "rest.service"
+                domain: "rest.domain"
+                environment: "rest.environment"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/mcp
+          name: mcp-tools
+          description: "Execute Traceable MCP tools for AI-assisted security analysis"
+          operations:
+            - method: POST
+              name: execute-mcp-tool
+              description: "Execute an MCP security analysis tool"
+              call: "traceable-platform.execute-mcp-tool"
+              with:
+                tool_name: "rest.tool"
+                parameters: "rest.parameters"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: api-security-operations-mcp
+      transport: http
+      description: "MCP server for AI-assisted Traceable API security operations."
+      tools:
+        - name: query-discovered-apis
+          description: "Query Traceable for discovered API endpoints with risk scores and authentication status"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "traceable-platform.execute-graphql-query"
+          with:
+            query: "tools.query"
+            variables: "tools.variables"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: query-vulnerabilities
+          description: "Query Traceable for API vulnerability findings with OWASP classification and severity"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "traceable-platform.execute-graphql-query"
+          with:
+            query: "tools.query"
+            variables: "tools.variables"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: query-threat-activity
+          description: "Query Traceable for API threat actor activity, attack patterns, and incidents"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "traceable-platform.execute-graphql-query"
+          with:
+            query: "tools.query"
+            variables: "tools.variables"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: download-api-spec
+          description: "Download OpenAPI specification discovered by Traceable for a service or domain"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "traceable-platform.download-api-spec"
+          with:
+            format: "tools.format"
+            service: "tools.service"
+            domain: "tools.domain"
+            environment: "tools.environment"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: execute-mcp-tool
+          description: "Execute a Traceable MCP tool for AI-assisted security analysis"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "traceable-platform.execute-mcp-tool"
+          with:
+            tool_name: "tools.tool_name"
+            parameters: "tools.parameters"
+          outputParameters:
+            - type: object
+              mapping: "$."

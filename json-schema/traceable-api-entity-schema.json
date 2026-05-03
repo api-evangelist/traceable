@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/traceable/api-entity.json",
+  "title": "Traceable API Entity",
+  "description": "Schema for a discovered API entity in the Traceable platform including endpoint details, authentication information, risk scores, and observability metadata.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the API entity."
+    },
+    "name": {
+      "type": "string",
+      "description": "The API endpoint path or name."
+    },
+    "entityType": {
+      "type": "string",
+      "description": "The entity type in the Traceable taxonomy.",
+      "enum": ["API", "SERVICE", "DOMAIN", "BACKEND", "ACTOR", "BACKEND_API"]
+    },
+    "service": {
+      "type": "string",
+      "description": "The service that owns this API endpoint."
+    },
+    "domain": {
+      "type": "string",
+      "description": "The domain this API belongs to."
+    },
+    "method": {
+      "type": "string",
+      "description": "HTTP method for the endpoint.",
+      "enum": ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"]
+    },
+    "authenticated": {
+      "type": "boolean",
+      "description": "Whether the endpoint requires authentication."
+    },
+    "authType": {
+      "type": "string",
+      "description": "Authentication type for the endpoint.",
+      "examples": ["Bearer", "API Key", "Basic", "OAuth2", "None"]
+    },
+    "riskScore": {
+      "type": "string",
+      "description": "Current risk score for the endpoint.",
+      "enum": ["LOW", "MEDIUM", "HIGH", "CRITICAL"]
+    },
+    "isInternal": {
+      "type": "boolean",
+      "description": "Whether the endpoint is classified as internal."
+    },
+    "discoveryState": {
+      "type": "string",
+      "description": "API discovery processing state.",
+      "enum": ["DISCOVERED", "UNDER_DISCOVERY"]
+    },
+    "lastActivity": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of last observed activity."
+    },
+    "labels": {
+      "type": "array",
+      "description": "User-assigned labels for the API (max 32).",
+      "maxItems": 32,
+      "items": {
+        "type": "string"
+      }
+    },
+    "callVolume": {
+      "type": "integer",
+      "description": "Number of API calls observed in the reporting period.",
+      "minimum": 0
+    },
+    "errorRate": {
+      "type": "number",
+      "format": "double",
+      "description": "Error rate as a percentage.",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "latencyP99": {
+      "type": "number",
+      "format": "double",
+      "description": "99th percentile latency in milliseconds."
+    },
+    "attributes": {
+      "type": "array",
+      "description": "Key-value attribute pairs for the entity.",
+      "items": {
+        "type": "object",
+        "required": ["key", "value"],
+        "properties": {
+          "key": { "type": "string", "description": "Attribute key." },
+          "value": { "type": "string", "description": "Attribute value." }
+        }
+      }
+    }
+  },
+  "required": ["id", "name", "entityType"]
+}
