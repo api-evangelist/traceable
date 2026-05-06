@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,148 +9,74 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Traceable
 providerId: traceable
-publisherName: Traceable
-serviceCategory: API
+publisherName: Harness, Inc.
+serviceCategory: API Security
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
+  - API Security
   - API Discovery
   - API Protection
-  - API Security
-  - API Testing
-  - Observability
-  - Security
-  - Threat Detection
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Traceable API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: 'FinOps shape for Traceable: contracted enterprise subscription for the API security platform,
+  typically scaled by transactions ingested, agent/sensor count, modules enabled, and retention. No public
+  meter rates are published; this artifact captures structural meters.'
+sources:
+  - https://www.traceable.ai/pricing
+notes: Pricing not publicly retrievable; meters are descriptive and unpriced. PublisherName reflects Traceable's
+  acquisition by Harness in 2025.
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Contracted Subscription
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
+    - Refund
 focusColumns:
   ServiceName: Traceable
-  ServiceCategory: Developer Tools / API
+  ServiceCategory: API Security
   ProviderName: Traceable
-  PublisherName: Traceable
-  InvoiceIssuerName: Traceable
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PublisherName: Harness, Inc.
+  InvoiceIssuerName: Harness, Inc.
   BillingCurrency: USD
-  ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: api_transactions_ingested
+    description: Volume of API transactions captured by Traceable agents/sensors and analyzed by the platform.
+    unit: transaction
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
-    aggregation: sum
+      - environment
+      - service
+  - name: agents_deployed
+    description: Number of in-line / out-of-band Traceable agents (sensor licenses) deployed.
+    unit: agent-month
+    aggregation: avg
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
+      - cluster
+      - environment
+  - name: data_retention
+    description: Retention window contracted for transaction telemetry (e.g., 30 / 90 days).
+    unit: day
+    aggregation: max
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Traceable Platform GraphQL API
-    baseURL: https://api.traceable.ai
-    tags:
-      - API Discovery
-      - API Security
-      - GraphQL
-      - Threat Detection
-      - Vulnerability Management
-    serviceName: Traceable Platform GraphQL API
-    serviceCategory: API
-  - name: Traceable API Security Platform
-    baseURL: ''
-    tags:
-      - API Discovery
-      - API Security
-      - API Testing
-      - Observability
-      - Threat Detection
-    serviceName: Traceable API Security Platform
-    serviceCategory: API
-  - name: Traceable Active Security Testing
-    baseURL: ''
-    tags:
-      - API Security Testing
-      - CI/CD
-      - DAST
-      - Security Automation
-    serviceName: Traceable Active Security Testing
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - module
+principles:
+  - name: Visibility
+    description: Pull contract usage from the Traceable customer-success report (transactions ingested,
+      agent count vs. cap); reconcile against your annual subscription tier each quarter.
+  - name: Allocation
+    description: Tag agents and ingested traffic with the owning microservice / business unit so the security
+      cost is attributable to the API teams generating it.
+  - name: Optimization
+    description: Tune sampling and retention by environment (full retention for prod, reduced for non-prod);
+      retire idle agents and prune orphaned API discoveries before each renewal.
+  - name: Accountability
+    description: AppSec or Platform Security team owns the Traceable contract and policy; engineering
+      service owners are accountable for fixing the discoveries it surfaces.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
