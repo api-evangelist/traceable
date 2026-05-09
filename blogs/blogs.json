@@ -3,11 +3,11 @@
   "feeds": [
     {
       "source": "https://www.traceable.ai/blog",
-      "feed_url": "https://www.traceable.ai/feed",
-      "saved": 10,
-      "title": "Traceable Application & API Security"
+      "feed_url": "https://www.traceable.ai/feed/",
+      "title": "Traceable Application & API Security",
+      "saved": 0
     }
   ],
   "post_count": 10,
-  "fetched": "2026-05-03T23:37:48Z"
+  "fetched": "2026-05-09T20:17:51Z"
 }
