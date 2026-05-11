@@ -137,6 +137,10 @@ common:
     url: https://github.com/Traceableai
   - type: MCPServer
     url: https://docs.traceable.ai/docs/traceable-mcp-server
+  - type: Integrations
+    url: https://www.traceable.ai/partners
+integrations:
+  - name: arrow
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
