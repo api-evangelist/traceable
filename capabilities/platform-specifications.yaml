@@ -1,0 +1,103 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Traceable Platform API — Specifications
+  description: 'Traceable Platform API — Specifications. 1 operations. Lead operation: Download API Specification. Self-contained
+    Naftiko capability covering one Traceable business surface.'
+  tags:
+  - Traceable
+  - Specifications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRACEABLE_API_KEY: TRACEABLE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: platform-specifications
+    baseUri: https://api.traceable.ai
+    description: Traceable Platform API — Specifications business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-download
+      path: /rest/download
+      operations:
+      - name: downloadapispec
+        method: GET
+        description: Download API Specification
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: format
+          in: query
+          type: string
+          description: Specification format to download.
+        - name: service
+          in: query
+          type: string
+          description: Filter specification to a specific service name.
+        - name: domain
+          in: query
+          type: string
+          description: Filter specification to a specific domain.
+        - name: label
+          in: query
+          type: string
+          description: Filter specification by API label.
+        - name: environment
+          in: query
+          type: string
+          description: Filter specification by deployment environment.
+    authentication:
+      type: bearer
+      token: '{{env.TRACEABLE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: platform-specifications-rest
+    port: 8080
+    description: REST adapter for Traceable Platform API — Specifications. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/download
+      name: rest-download
+      description: REST surface for rest-download.
+      operations:
+      - method: GET
+        name: downloadapispec
+        description: Download API Specification
+        call: platform-specifications.downloadapispec
+        with:
+          format: rest.format
+          service: rest.service
+          domain: rest.domain
+          label: rest.label
+          environment: rest.environment
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: platform-specifications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Traceable Platform API — Specifications. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: download-api-specification
+      description: Download API Specification
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: platform-specifications.downloadapispec
+      with:
+        format: tools.format
+        service: tools.service
+        domain: tools.domain
+        label: tools.label
+        environment: tools.environment
+      outputParameters:
+      - type: object
+        mapping: $.

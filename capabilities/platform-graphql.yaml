@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Traceable Platform API — GraphQL
+  description: 'Traceable Platform API — GraphQL. 2 operations. Lead operation: Execute GraphQL Query. Self-contained Naftiko
+    capability covering one Traceable business surface.'
+  tags:
+  - Traceable
+  - GraphQL
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRACEABLE_API_KEY: TRACEABLE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: platform-graphql
+    baseUri: https://api.traceable.ai
+    description: Traceable Platform API — GraphQL business capability. Self-contained, no shared references.
+    resources:
+    - name: graphql
+      path: /graphql
+      operations:
+      - name: executegraphqlquery
+        method: POST
+        description: Execute GraphQL Query
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: mcp
+      path: /mcp
+      operations:
+      - name: executemcptool
+        method: POST
+        description: Execute MCP Tool
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TRACEABLE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: platform-graphql-rest
+    port: 8080
+    description: REST adapter for Traceable Platform API — GraphQL. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/graphql
+      name: graphql
+      description: REST surface for graphql.
+      operations:
+      - method: POST
+        name: executegraphqlquery
+        description: Execute GraphQL Query
+        call: platform-graphql.executegraphqlquery
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/mcp
+      name: mcp
+      description: REST surface for mcp.
+      operations:
+      - method: POST
+        name: executemcptool
+        description: Execute MCP Tool
+        call: platform-graphql.executemcptool
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: platform-graphql-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Traceable Platform API — GraphQL. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: execute-graphql-query
+      description: Execute GraphQL Query
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: platform-graphql.executegraphqlquery
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: execute-mcp-tool
+      description: Execute MCP Tool
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: platform-graphql.executemcptool
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
