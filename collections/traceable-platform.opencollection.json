@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Traceable Platform API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "GraphQL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Execute GraphQL Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.traceable.ai/graphql",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a GraphQL query or mutation against the Traceable platform. Supports queries for entities, vulnerabilities, threat activity, explore datasets, API testing data, analytics batches, and authentication hooks. Use the Authorization header with your platform API token."
+        },
+        {
+          "info": {
+            "name": "Execute MCP Tool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.traceable.ai/mcp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Executes a tool via the Traceable MCP (Model Context Protocol) server. The MCP server exposes 12 tools for AI-assisted security workflows including attribute mappings, GraphQL query templates, threat activity time ranges, vulnerability filter values, sensitive data type details, and trend data calculation."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Specifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download API Specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.traceable.ai/rest/download",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specification format to download."
+              },
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "Filter specification to a specific service name."
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Filter specification to a specific domain."
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Filter specification by API label."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Filter specification by deployment environment."
+              }
+            ]
+          },
+          "docs": "Downloads the OpenAPI or WSDL specification generated from discovered API traffic for the authenticated environment. The specification reflects the actual observed API surface including endpoints, parameters, and request/response schemas. Use the createApiDefinition GraphQL mutation to trigger generation first, then retrieve the download URL via getApiDefinition query."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

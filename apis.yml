@@ -1,9 +1,10 @@
 aid: traceable
 name: Traceable
-description: Traceable is an API security and observability platform that provides API discovery, threat detection, and protection
-  across the full application lifecycle. It uses context-aware AI to detect and block API-based attacks while providing deep
-  visibility into API behavior and risk. Traceable exposes public GraphQL APIs for configuration, analytics, and operational
-  data access, as well as an MCP server with 12 tools for AI-assisted security workflows.
+description: >-
+  Traceable is an API security and observability platform that provides API discovery, threat detection, and protection
+  across the full application lifecycle. It uses context-aware AI to detect and block API-based attacks while providing
+  deep visibility into API behavior and risk. Traceable exposes public GraphQL APIs for configuration, analytics, and
+  operational data access, as well as an MCP server with 12 tools for AI-assisted security workflows.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -23,9 +24,10 @@ specificationVersion: '0.19'
 apis:
 - aid: traceable:traceable-platform-graphql
   name: Traceable Platform GraphQL API
-  description: The Traceable Platform GraphQL API provides programmatic access to API security configuration and operational
-    data. Supports queries for API discovery analytics, vulnerability data, threat activity, entity scoping, and API test
-    suite management. Authentication uses a platform API token passed in the Authorization header.
+  description: >-
+    The Traceable Platform GraphQL API provides programmatic access to API security configuration and operational
+    data. Supports queries for API discovery analytics, vulnerability data, threat activity, entity scoping, and API
+    test suite management. Authentication uses a platform API token passed in the Authorization header.
   humanURL: https://docs.traceable.ai/docs/public-apis
   baseURL: https://api.traceable.ai
   tags:
@@ -47,24 +49,21 @@ apis:
     url: json-ld/traceable-context.jsonld
   - type: SpectralRules
     url: rules/traceable-rules.yml
-  - type: NaftikoCapabilities
-    url: capabilities/api-security-operations.yaml
   - type: Vocabulary
     url: vocabulary/traceable-vocabulary.yml
   - type: GraphQL
     url: https://api.traceable.ai/graphql
   - type: APISpecDownload
     url: https://docs.traceable.ai/docs/download-api-spec
-  - type: NaftikoCapability
-    url: capabilities/platform-graphql.yaml
-  - type: NaftikoCapability
-    url: capabilities/platform-specifications.yaml
+  - url: graphql/traceable-graphql.md
+    type: GraphQL
 - aid: traceable:traceable-platform
   name: Traceable API Security Platform
-  description: Traceable provides an intelligent API security platform offering API discovery, threat detection and protection,
-    and API security testing. It uses distributed tracing and context-aware AI to understand API behavior, detect threats,
-    and protect APIs across the full application lifecycle. The platform supports REST, SOAP, gRPC, GraphQL, and WebSocket
-    APIs.
+  description: >-
+    Traceable provides an intelligent API security platform offering API discovery, threat detection and protection,
+    and API security testing. It uses distributed tracing and context-aware AI to understand API behavior, detect
+    threats, and protect APIs across the full application lifecycle. The platform supports REST, SOAP, gRPC, GraphQL,
+    and WebSocket APIs.
   humanURL: https://www.traceable.ai
   tags:
   - API Discovery
@@ -85,8 +84,10 @@ apis:
     url: https://docs.traceable.ai/docs/traceable-mcp-server
 - aid: traceable:traceable-ast
   name: Traceable Active Security Testing
-  description: Traceable Active Security Testing (AST) provides automated API security testing with GraphQL-based configuration
-    for scan creation, suite management, and CI/CD pipeline integration. Supports GitHub Actions, GitLab CI, and Jenkins integrations.
+  description: >-
+    Traceable Active Security Testing (AST) provides automated API security testing with GraphQL-based configuration
+    for scan creation, suite management, and CI/CD pipeline integration. Supports GitHub Actions, GitLab CI, and
+    Jenkins integrations.
   humanURL: https://docs.traceable.ai/docs/en/ast-getting-started
   tags:
   - API Security Testing
