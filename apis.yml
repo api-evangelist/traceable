@@ -106,6 +106,12 @@ apis:
   - type: GraphQLSuiteAPI
     url: https://docs.traceable.ai/docs/suites-using-graphql-api
 common:
+- type: VulnerabilityDisclosure
+  url: security/traceable-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/traceable-domain-security.yml
+- type: Authentication
+  url: authentication/traceable-authentication.yml
 - type: Website
   url: https://www.traceable.ai
 - type: Documentation

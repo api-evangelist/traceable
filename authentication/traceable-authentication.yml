@@ -1,0 +1,15 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/traceable-platform-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Platform API token generated through the Traceable dashboard. Pass as a Bearer
+    token in the Authorization header. Tokens are single-use and cannot be retrieved after initial
+    generation.
+  sources:
+  - openapi/traceable-platform-openapi.yml
