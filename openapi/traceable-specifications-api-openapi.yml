@@ -1,0 +1,111 @@
+openapi: 3.1.0
+info:
+  title: Traceable Platform GraphQL Specifications API
+  description: The Traceable Platform API provides programmatic access to the Traceable API security and observability platform. The API enables querying of discovered API endpoints, vulnerability data, threat activity, entity analytics, and API security test suite configuration. Authentication uses a platform API token passed in the Authorization header. The platform exposes both a GraphQL API and REST endpoints for API specification downloads and MCP server access.
+  version: '1.0'
+  contact:
+    name: Traceable Support
+    url: https://docs.traceable.ai
+  termsOfService: https://www.traceable.ai
+servers:
+- url: https://api.traceable.ai
+  description: Traceable Production API
+security:
+- bearerAuth: []
+tags:
+- name: Specifications
+  description: Download OpenAPI, WSDL, and other API specification files generated from discovered traffic.
+paths:
+  /rest/download:
+    get:
+      operationId: downloadAPISpec
+      summary: Download API Specification
+      description: Downloads the OpenAPI or WSDL specification generated from discovered API traffic for the authenticated environment. The specification reflects the actual observed API surface including endpoints, parameters, and request/response schemas. Use the createApiDefinition GraphQL mutation to trigger generation first, then retrieve the download URL via getApiDefinition query.
+      tags:
+      - Specifications
+      parameters:
+      - name: format
+        in: query
+        description: Specification format to download.
+        required: false
+        schema:
+          type: string
+          enum:
+          - openapi-yaml
+          - openapi-json
+          - wsdl
+          default: openapi-yaml
+      - name: service
+        in: query
+        description: Filter specification to a specific service name.
+        required: false
+        schema:
+          type: string
+      - name: domain
+        in: query
+        description: Filter specification to a specific domain.
+        required: false
+        schema:
+          type: string
+      - name: label
+        in: query
+        description: Filter specification by API label.
+        required: false
+        schema:
+          type: string
+      - name: environment
+        in: query
+        description: Filter specification by deployment environment.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: API specification file download
+          content:
+            application/x-yaml:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: object
+            application/xml:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Specification not found or not yet generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      description: Standard error response from the Traceable API.
+      properties:
+        error:
+          type: string
+          description: Error type identifier.
+        message:
+          type: string
+          description: Human-readable error description.
+        statusCode:
+          type: integer
+          description: HTTP status code.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Platform API token generated through the Traceable dashboard. Pass as a Bearer token in the Authorization header. Tokens are single-use and cannot be retrieved after initial generation.
+externalDocs:
+  description: Traceable API Documentation
+  url: https://docs.traceable.ai/docs/public-apis
