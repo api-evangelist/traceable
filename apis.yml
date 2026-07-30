@@ -6,9 +6,22 @@ description: >-
   deep visibility into API behavior and risk. Traceable exposes public GraphQL APIs for configuration, analytics, and
   operational data access, as well as an MCP server with 12 tools for AI-assisted security workflows.
 type: Index
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/traceable.png
 tags:
 - API Discovery
 - API Protection
@@ -22,48 +35,13 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/traceable/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-- aid: traceable:traceable-platform-graphql
-  name: Traceable Platform GraphQL API
-  description: >-
-    The Traceable Platform GraphQL API provides programmatic access to API security configuration and operational
-    data. Supports queries for API discovery analytics, vulnerability data, threat activity, entity scoping, and API
-    test suite management. Authentication uses a platform API token passed in the Authorization header.
-  humanURL: https://docs.traceable.ai/docs/public-apis
-  baseURL: https://api.traceable.ai
-  tags:
-  - API Discovery
-  - API Security
-  - GraphQL
-  - Threat Detection
-  - Vulnerability Management
-  properties:
-  - type: Documentation
-    url: https://docs.traceable.ai/docs/public-apis
-  - type: OpenAPI
-    url: openapi/traceable-platform-openapi.yml
-  - type: JSONSchema
-    url: json-schema/traceable-api-entity-schema.json
-  - type: JSONStructure
-    url: json-structure/traceable-api-entity-structure.json
-  - type: JSONLD
-    url: json-ld/traceable-context.jsonld
-  - type: SpectralRules
-    url: rules/traceable-rules.yml
-  - type: Vocabulary
-    url: vocabulary/traceable-vocabulary.yml
-  - type: GraphQL
-    url: https://api.traceable.ai/graphql
-  - type: APISpecDownload
-    url: https://docs.traceable.ai/docs/download-api-spec
-  - url: graphql/traceable-graphql.md
-    type: GraphQL
 - aid: traceable:traceable-platform
   name: Traceable API Security Platform
   description: >-
-    Traceable provides an intelligent API security platform offering API discovery, threat detection and protection,
-    and API security testing. It uses distributed tracing and context-aware AI to understand API behavior, detect
-    threats, and protect APIs across the full application lifecycle. The platform supports REST, SOAP, gRPC, GraphQL,
-    and WebSocket APIs.
+    Traceable provides an intelligent API security platform offering API discovery, threat detection and
+    protection, and API security testing. It uses distributed tracing and context-aware AI to understand
+    API behavior, detect threats, and protect APIs across the full application lifecycle. The platform
+    supports REST, SOAP, gRPC, GraphQL, and WebSocket APIs.
   humanURL: https://www.traceable.ai
   tags:
   - API Discovery
@@ -85,9 +63,9 @@ apis:
 - aid: traceable:traceable-ast
   name: Traceable Active Security Testing
   description: >-
-    Traceable Active Security Testing (AST) provides automated API security testing with GraphQL-based configuration
-    for scan creation, suite management, and CI/CD pipeline integration. Supports GitHub Actions, GitLab CI, and
-    Jenkins integrations.
+    Traceable Active Security Testing (AST) provides automated API security testing with GraphQL-based
+    configuration for scan creation, suite management, and CI/CD pipeline integration. Supports GitHub
+    Actions, GitLab CI, and Jenkins integrations.
   humanURL: https://docs.traceable.ai/docs/en/ast-getting-started
   tags:
   - API Security Testing
@@ -105,6 +83,65 @@ apis:
     url: https://docs.traceable.ai/docs/scans-using-graphql-api
   - type: GraphQLSuiteAPI
     url: https://docs.traceable.ai/docs/suites-using-graphql-api
+- aid: traceable:traceable-graphql-api
+  name: Traceable GraphQL API
+  description: >-
+    Execute GraphQL queries against the Traceable platform for advanced analytics, entity queries, and
+    bulk data retrieval.
+  humanURL: https://docs.traceable.ai/docs/public-apis
+  baseURL: https://api.traceable.ai
+  tags:
+  - GraphQL
+  properties:
+  - type: OpenAPI
+    url: openapi/traceable-graphql-api-openapi.yml
+  - type: Documentation
+    url: https://docs.traceable.ai/docs/public-apis
+  - type: JSONSchema
+    url: json-schema/traceable-api-entity-schema.json
+  - type: JSONStructure
+    url: json-structure/traceable-api-entity-structure.json
+  - type: JSONLD
+    url: json-ld/traceable-context.jsonld
+  - type: SpectralRules
+    url: rules/traceable-rules.yml
+  - type: Vocabulary
+    url: vocabulary/traceable-vocabulary.yml
+  - type: GraphQL
+    url: https://api.traceable.ai/graphql
+  - type: APISpecDownload
+    url: https://docs.traceable.ai/docs/download-api-spec
+  - type: GraphQL
+    url: graphql/traceable-graphql.md
+- aid: traceable:traceable-specifications-api
+  name: Traceable Specifications API
+  description: >-
+    Download OpenAPI, WSDL, and other API specification files generated from discovered traffic.
+  humanURL: https://docs.traceable.ai/docs/public-apis
+  baseURL: https://api.traceable.ai
+  tags:
+  - Specifications
+  properties:
+  - type: OpenAPI
+    url: openapi/traceable-specifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.traceable.ai/docs/public-apis
+  - type: JSONSchema
+    url: json-schema/traceable-api-entity-schema.json
+  - type: JSONStructure
+    url: json-structure/traceable-api-entity-structure.json
+  - type: JSONLD
+    url: json-ld/traceable-context.jsonld
+  - type: SpectralRules
+    url: rules/traceable-rules.yml
+  - type: Vocabulary
+    url: vocabulary/traceable-vocabulary.yml
+  - type: GraphQL
+    url: https://api.traceable.ai/graphql
+  - type: APISpecDownload
+    url: https://docs.traceable.ai/docs/download-api-spec
+  - type: GraphQL
+    url: graphql/traceable-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/traceable-agentic-access.yml
