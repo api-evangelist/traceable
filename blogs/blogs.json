@@ -2,13 +2,6 @@
   "repo": "traceable",
   "feeds": [
     {
-      "source": "https://www.traceable.ai/feed/",
-      "feed_url": "https://www.traceable.ai/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "feed"
-    },
-    {
       "source": "https://docs.traceable.ai",
       "feed_url": "https://docs.traceable.ai",
       "title": "",
@@ -17,5 +10,5 @@
     }
   ],
   "post_count": 17,
-  "fetched": "2026-07-11T11:50:51Z"
+  "fetched": "2026-08-01T15:49:00Z"
 }

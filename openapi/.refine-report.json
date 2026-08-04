@@ -1,0 +1,16 @@
+{
+  "provider": "traceable",
+  "sources": [
+    "traceable-graphql-api-openapi.yml",
+    "traceable-specifications-api-openapi.yml"
+  ],
+  "outputs": [
+    "traceable-graphql-api-openapi.yml",
+    "traceable-specifications-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
