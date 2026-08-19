@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Traceable Platform GraphQL Specifications API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Specifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download API Specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.traceable.ai/rest/download",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Specification format to download."
+              },
+              {
+                "name": "service",
+                "value": "",
+                "type": "query",
+                "description": "Filter specification to a specific service name."
+              },
+              {
+                "name": "domain",
+                "value": "",
+                "type": "query",
+                "description": "Filter specification to a specific domain."
+              },
+              {
+                "name": "label",
+                "value": "",
+                "type": "query",
+                "description": "Filter specification by API label."
+              },
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query",
+                "description": "Filter specification by deployment environment."
+              }
+            ]
+          },
+          "docs": "Downloads the OpenAPI or WSDL specification generated from discovered API traffic for the authenticated environment. The specification reflects the actual observed API surface including endpoints, parameters, and request/response schemas. Use the createApiDefinition GraphQL mutation to trigger generation first, then retrieve the download URL via getApiDefinition query."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
