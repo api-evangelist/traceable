@@ -96,18 +96,17 @@ apis:
     url: https://docs.traceable.ai/docs/scans-using-graphql-api
   - type: GraphQLSuiteAPI
     url: https://docs.traceable.ai/docs/suites-using-graphql-api
-- aid: traceable:traceable-graphql-api
-  name: Traceable GraphQL API
+- aid: traceable:traceable-specifications-api
+  name: Traceable Specifications API
   description: >-
-    Execute GraphQL queries against the Traceable platform for advanced analytics, entity queries, and
-    bulk data retrieval.
+    Download OpenAPI, WSDL, and other API specification files generated from discovered traffic.
   humanURL: https://docs.traceable.ai/docs/public-apis
   baseURL: https://api.traceable.ai
   tags:
-  - GraphQL
+  - Specifications
   properties:
   - type: OpenAPI
-    url: openapi/traceable-graphql-api-openapi.yml
+    url: openapi/traceable-specifications-api-openapi.yml
   - type: Documentation
     url: https://docs.traceable.ai/docs/public-apis
   - type: JSONSchema
@@ -126,17 +125,18 @@ apis:
     url: https://docs.traceable.ai/docs/download-api-spec
   - type: GraphQL
     url: graphql/traceable-graphql.md
-- aid: traceable:traceable-specifications-api
-  name: Traceable Specifications API
+- aid: traceable:traceable-graph-ql-api
+  name: Traceable Graph QL API
   description: >-
-    Download OpenAPI, WSDL, and other API specification files generated from discovered traffic.
-  humanURL: https://docs.traceable.ai/docs/public-apis
+    Execute GraphQL queries against the Traceable platform for advanced analytics, entity queries, and
+    bulk data retrieval.
+  humanURL: https://www.traceable.ai
   baseURL: https://api.traceable.ai
   tags:
-  - Specifications
+  - Graph QL
   properties:
   - type: OpenAPI
-    url: openapi/traceable-specifications-api-openapi.yml
+    url: openapi/traceable-graph-ql-api-openapi.yml
   - type: Documentation
     url: https://docs.traceable.ai/docs/public-apis
   - type: JSONSchema
