@@ -103,6 +103,8 @@ apis:
   humanURL: https://docs.traceable.ai/docs/public-apis
   baseURL: https://api.traceable.ai
   tags:
+  - Specification
+  tags_raw:
   - Specifications
   properties:
   - type: OpenAPI
@@ -133,6 +135,8 @@ apis:
   humanURL: https://www.traceable.ai
   baseURL: https://api.traceable.ai
   tags:
+  - GraphQL
+  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
