@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Traceable Platform GraphQL Specifications API
+  title: Traceable Platform Specifications API
   description: The Traceable Platform API provides programmatic access to the Traceable API security and observability platform. The API enables querying of discovered API endpoints, vulnerability data, threat activity, entity analytics, and API security test suite configuration. Authentication uses a platform API token passed in the Authorization header. The platform exposes both a GraphQL API and REST endpoints for API specification downloads and MCP server access.
   version: '1.0'
   contact:

@@ -1,16 +1,25 @@
 {
   "provider": "traceable",
   "sources": [
-    "traceable-graphql-api-openapi.yml",
-    "traceable-specifications-api-openapi.yml"
+    "_original/traceable-platform-openapi.yml"
   ],
   "outputs": [
     "traceable-graphql-api-openapi.yml",
     "traceable-specifications-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "traceable-platform-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: traceable-graph-ql-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 4 total)"
+  ],
+  "skipped": [
+    "traceable-graph-ql-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "traceable-specifications-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
