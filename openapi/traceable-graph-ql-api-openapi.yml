@@ -82,35 +82,22 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    GraphQLResponse:
+    GraphQLRequest:
       type: object
-      description: A GraphQL response containing data or errors.
+      description: A GraphQL query or mutation request.
+      required:
+      - query
       properties:
-        data:
+        query:
+          type: string
+          description: The GraphQL query or mutation string.
+        variables:
           type: object
-          description: The GraphQL response data.
+          description: Variables to pass to the GraphQL query.
           additionalProperties: true
-        errors:
-          type: array
-          description: List of GraphQL errors if any occurred.
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-              locations:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    line:
-                      type: integer
-                    column:
-                      type: integer
-              path:
-                type: array
-                items:
-                  type: string
+        operationName:
+          type: string
+          description: Name of the operation to execute when multiple are defined.
     MCPRequest:
       type: object
       description: An MCP tool invocation request.
@@ -146,22 +133,35 @@ components:
         error:
           type: string
           description: Error message if the tool execution failed.
-    GraphQLRequest:
+    GraphQLResponse:
       type: object
-      description: A GraphQL query or mutation request.
-      required:
-      - query
+      description: A GraphQL response containing data or errors.
       properties:
-        query:
-          type: string
-          description: The GraphQL query or mutation string.
-        variables:
+        data:
           type: object
-          description: Variables to pass to the GraphQL query.
+          description: The GraphQL response data.
           additionalProperties: true
-        operationName:
-          type: string
-          description: Name of the operation to execute when multiple are defined.
+        errors:
+          type: array
+          description: List of GraphQL errors if any occurred.
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+              locations:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    line:
+                      type: integer
+                    column:
+                      type: integer
+              path:
+                type: array
+                items:
+                  type: string
     Error:
       type: object
       description: Standard error response from the Traceable API.
