@@ -135,6 +135,8 @@ apis:
   humanURL: https://www.traceable.ai
   baseURL: https://api.traceable.ai
   tags:
+  - GraphQL
+  tags_raw:
   - Graph QL
   properties:
   - type: OpenAPI
