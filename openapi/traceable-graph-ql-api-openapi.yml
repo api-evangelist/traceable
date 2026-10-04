@@ -82,57 +82,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    GraphQLRequest:
-      type: object
-      description: A GraphQL query or mutation request.
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: The GraphQL query or mutation string.
-        variables:
-          type: object
-          description: Variables to pass to the GraphQL query.
-          additionalProperties: true
-        operationName:
-          type: string
-          description: Name of the operation to execute when multiple are defined.
-    MCPRequest:
-      type: object
-      description: An MCP tool invocation request.
-      required:
-      - tool
-      properties:
-        tool:
-          type: string
-          description: 'Name of the MCP tool to execute. Available tools include: get_attribute_mappings, get_graphql_query_template_details, execute_graphql_query, get_query_time_range, get_threat_activity_timerange, get_vuln_enum_filter_supported_values, get_datatypes_details_from_datatype_names, get_datatypes_details_from_datatype_ids, calculate_trend_data, get_display_urls.'
-          enum:
-          - get_attribute_mappings
-          - get_graphql_query_template_details
-          - execute_graphql_query
-          - get_query_time_range
-          - get_threat_activity_timerange
-          - get_vuln_enum_filter_supported_values
-          - get_datatypes_details_from_datatype_names
-          - get_datatypes_details_from_datatype_ids
-          - calculate_trend_data
-          - get_display_urls
-        parameters:
-          type: object
-          description: Parameters for the tool call.
-          additionalProperties: true
-    MCPResponse:
-      type: object
-      description: Result of an MCP tool execution.
-      properties:
-        result:
-          type: object
-          description: Tool execution result data.
-          additionalProperties: true
-        error:
-          type: string
-          description: Error message if the tool execution failed.
     GraphQLResponse:
       type: object
       description: A GraphQL response containing data or errors.
@@ -162,6 +111,30 @@ components:
                 type: array
                 items:
                   type: string
+    MCPRequest:
+      type: object
+      description: An MCP tool invocation request.
+      required:
+      - tool
+      properties:
+        tool:
+          type: string
+          description: 'Name of the MCP tool to execute. Available tools include: get_attribute_mappings, get_graphql_query_template_details, execute_graphql_query, get_query_time_range, get_threat_activity_timerange, get_vuln_enum_filter_supported_values, get_datatypes_details_from_datatype_names, get_datatypes_details_from_datatype_ids, calculate_trend_data, get_display_urls.'
+          enum:
+          - get_attribute_mappings
+          - get_graphql_query_template_details
+          - execute_graphql_query
+          - get_query_time_range
+          - get_threat_activity_timerange
+          - get_vuln_enum_filter_supported_values
+          - get_datatypes_details_from_datatype_names
+          - get_datatypes_details_from_datatype_ids
+          - calculate_trend_data
+          - get_display_urls
+        parameters:
+          type: object
+          description: Parameters for the tool call.
+          additionalProperties: true
     Error:
       type: object
       description: Standard error response from the Traceable API.
@@ -175,6 +148,33 @@ components:
         statusCode:
           type: integer
           description: HTTP status code.
+    MCPResponse:
+      type: object
+      description: Result of an MCP tool execution.
+      properties:
+        result:
+          type: object
+          description: Tool execution result data.
+          additionalProperties: true
+        error:
+          type: string
+          description: Error message if the tool execution failed.
+    GraphQLRequest:
+      type: object
+      description: A GraphQL query or mutation request.
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The GraphQL query or mutation string.
+        variables:
+          type: object
+          description: Variables to pass to the GraphQL query.
+          additionalProperties: true
+        operationName:
+          type: string
+          description: Name of the operation to execute when multiple are defined.
   securitySchemes:
     bearerAuth:
       type: http
