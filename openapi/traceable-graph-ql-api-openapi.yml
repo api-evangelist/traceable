@@ -111,6 +111,46 @@ components:
                 type: array
                 items:
                   type: string
+    MCPResponse:
+      type: object
+      description: Result of an MCP tool execution.
+      properties:
+        result:
+          type: object
+          description: Tool execution result data.
+          additionalProperties: true
+        error:
+          type: string
+          description: Error message if the tool execution failed.
+    Error:
+      type: object
+      description: Standard error response from the Traceable API.
+      properties:
+        error:
+          type: string
+          description: Error type identifier.
+        message:
+          type: string
+          description: Human-readable error description.
+        statusCode:
+          type: integer
+          description: HTTP status code.
+    GraphQLRequest:
+      type: object
+      description: A GraphQL query or mutation request.
+      required:
+      - query
+      properties:
+        query:
+          type: string
+          description: The GraphQL query or mutation string.
+        variables:
+          type: object
+          description: Variables to pass to the GraphQL query.
+          additionalProperties: true
+        operationName:
+          type: string
+          description: Name of the operation to execute when multiple are defined.
     MCPRequest:
       type: object
       description: An MCP tool invocation request.
@@ -135,46 +175,6 @@ components:
           type: object
           description: Parameters for the tool call.
           additionalProperties: true
-    Error:
-      type: object
-      description: Standard error response from the Traceable API.
-      properties:
-        error:
-          type: string
-          description: Error type identifier.
-        message:
-          type: string
-          description: Human-readable error description.
-        statusCode:
-          type: integer
-          description: HTTP status code.
-    MCPResponse:
-      type: object
-      description: Result of an MCP tool execution.
-      properties:
-        result:
-          type: object
-          description: Tool execution result data.
-          additionalProperties: true
-        error:
-          type: string
-          description: Error message if the tool execution failed.
-    GraphQLRequest:
-      type: object
-      description: A GraphQL query or mutation request.
-      required:
-      - query
-      properties:
-        query:
-          type: string
-          description: The GraphQL query or mutation string.
-        variables:
-          type: object
-          description: Variables to pass to the GraphQL query.
-          additionalProperties: true
-        operationName:
-          type: string
-          description: Name of the operation to execute when multiple are defined.
   securitySchemes:
     bearerAuth:
       type: http
